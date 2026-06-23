@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "cli_integrations": {
+    "npm": {
+      "enabled": true,
+      "watch_scripts": ["start", "build", "test"],
+      "trigger_quack_on": "success"
+    },
+    "hermes": {
+      "enabled": false,
+      "monitor_channel": "ipc",
+      "trigger_quack_on": "task_complete"
+    },
+    "claude_code": {
+      "enabled": false,
+      "monitor_output": true
+    }
+  },
+  "animations": {
+    "idle": {
+      "description": "Default breathing animation",
+      "auto_transition_to": "walk",
+      "transition_probability": 0.01
+    },
+    "walk": {
+      "description": "Walking around screen",
+      "duration_ms": 3000,
+      "auto_transition_to": "idle"
+    },
+    "quack": {
+      "description": "Triggered on task completion",
+      "duration_ms": 1000,
+      "auto_transition_to": "idle",
+      "play_sound": true
+    },
+    "sleep": {
+      "description": "Random idle during walk",
+      "duration_ms": 3000,
+      "auto_transition_to": "idle"
+    }
+  },
+  "ui": {
+    "window_width": 120,
+    "window_height": 120,
+    "always_on_top": true,
+    "skip_taskbar": true,
+    "default_position": "bottom-right"
+  }
+}
