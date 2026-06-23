@@ -198,5 +198,11 @@ class DuckAnimator {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  new DuckAnimator();
+  console.log('DuckDuckTimee loaded! DOM ready.');
+  try {
+    new DuckAnimator();
+    console.log('DuckAnimator initialized successfully.');
+  } catch (e) {
+    console.error('Failed to initialize DuckAnimator:', e.message);
+  }
 });
