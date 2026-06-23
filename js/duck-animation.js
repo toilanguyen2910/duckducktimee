@@ -9,7 +9,7 @@ class DuckAnimator {
 
     // Sprite sheet config
     this.spriteSheet = new Image();
-    this.spriteSheet.src = '../assets/sprites/duck-sprite.png';
+    this.spriteSheet.src = './assets/sprites/duck-sprite.png';
     
     // Animation frame dimensions: 32x32 px
     // Sprite sheet: 1024x576 = 32 frames horizontally x 18 frames vertically
@@ -118,7 +118,7 @@ class DuckAnimator {
     
     // Play sound if available (placeholder)
     try {
-      const audio = new Audio('../assets/sounds/quack.mp3');
+      const audio = new Audio('./assets/sounds/quack.mp3');
       audio.play().catch(() => {});
     } catch (e) {
       console.log('Sound not available');
