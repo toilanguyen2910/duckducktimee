@@ -1,5 +1,3 @@
-const { ipcRenderer } = require('electron');
-
 class DuckAnimator {
   constructor() {
     this.canvas = document.getElementById('duck-canvas');
@@ -82,16 +80,18 @@ class DuckAnimator {
 
   setupIPC() {
     // Listen for CLI task completion signal
-    ipcRenderer.on('task-complete', () => {
-      this.quack();
-    });
+    if (window.electronAPI) {
+      window.electronAPI.onTaskComplete(() => {
+        this.quack();
+      });
 
-    // Listen for state change requests
-    ipcRenderer.on('set-state', (event, state) => {
-      if (this.animations[state]) {
-        this.setState(state);
-      }
-    });
+      // Listen for state change requests
+      window.electronAPI.onSetState((event, state) => {
+        if (this.animations[state]) {
+          this.setState(state);
+        }
+      });
+    }
   }
 
   setState(newState) {
@@ -102,7 +102,9 @@ class DuckAnimator {
     this.frameCounter = 0;
     this.stateTimer = 0;
     
-    ipcRenderer.send('duck-state-change', newState);
+    if (window.electronAPI) {
+      window.electronAPI.sendStateChange(newState);
+    }
 
     // Auto-transition after state duration
     if (newState !== 'idle' && newState !== 'walk') {
@@ -114,7 +116,10 @@ class DuckAnimator {
 
   quack() {
     this.setState('quack');
-    ipcRenderer.send('duck-quack');
+    
+    if (window.electronAPI) {
+      window.electronAPI.sendQuack();
+    }
     
     // Play sound if available (placeholder)
     try {

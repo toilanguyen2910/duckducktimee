@@ -15,13 +15,17 @@ function createWindow() {
     skipTaskbar: true,
     resizable: false,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
   mainWindow.loadFile('index.html');
+  
+  // Open DevTools for debugging
+  mainWindow.webContents.openDevTools();
+  
   mainWindow.setPosition(
     Math.floor((require('electron').screen.getPrimaryDisplay().workAreaSize.width - 120) / 2),
     require('electron').screen.getPrimaryDisplay().workAreaSize.height - 160
