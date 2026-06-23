@@ -32,7 +32,7 @@ function createWindow() {
 }
 
 function createTray() {
-  const icon = nativeImage.createFromPath(path.join(__dirname, 'assets/sprites/duck-sprite.png'));
+  const icon = nativeImage.createFromPath(path.join(__dirname, 'assets/icon.png'));
   tray = new Tray(icon.resize({ width: 16, height: 16 }));
 
   const contextMenu = Menu.buildFromTemplate([
