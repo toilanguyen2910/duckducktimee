@@ -6,6 +6,7 @@ let tray = null;
 let duckState = 'idle';
 
 function createWindow() {
+  console.log('[main] Creating window...');
   mainWindow = new BrowserWindow({
     width: 120,
     height: 120,
@@ -22,6 +23,7 @@ function createWindow() {
   });
 
   mainWindow.loadFile('index.html');
+  console.log('[main] Window loaded, opening DevTools...');
   
   // Open DevTools for debugging
   mainWindow.webContents.openDevTools();
@@ -30,6 +32,7 @@ function createWindow() {
     Math.floor((require('electron').screen.getPrimaryDisplay().workAreaSize.width - 120) / 2),
     require('electron').screen.getPrimaryDisplay().workAreaSize.height - 160
   );
+  console.log('[main] Window positioned, ready.');
 
   // Make window click-through for right-click context menu
   mainWindow.setIgnoreMouseEvents(false);
