@@ -65,14 +65,15 @@ function createTray() {
 
   tray.setToolTip('DuckDuckTimee - Your AI CLI Companion');
   tray.setContextMenu(contextMenu);
+  // Store menu reference for later updates
+  tray._menu = contextMenu;
 }
 
 // IPC handlers for duck state
 ipcMain.on('duck-state-change', (event, state) => {
   duckState = state;
-  if (tray) {
-    const menu = tray.getContextMenu();
-    const stateItem = menu.getMenuItemById('state-label');
+  if (tray && tray._menu) {
+    const stateItem = tray._menu.getMenuItemById('state-label');
     if (stateItem) stateItem.label = `State: ${state}`;
   }
 });
